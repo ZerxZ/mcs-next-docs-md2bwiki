@@ -1,9 +1,9 @@
 import { Code, PhrasingContent, Paragraph } from "mdast";
 import { visit } from "unist-util-visit";
 import { h } from "./Utils";
+import BBase from "./BBase";
 
-export default class BCode {
-  constructor(private node: Code) {}
+export default class BCode extends BBase<Code> {
   public toNode() {
     const { node } = this;
     const value = h("syntaxhighlight", node.value, { lang: node.lang });
@@ -24,8 +24,5 @@ export default class BCode {
     visit<Code, "code">(tree, "code", (node, index, parent) => {
       BCode.create(node).toNode();
     });
-  }
-  public static create(node: Code) {
-    return new this(node);
   }
 }

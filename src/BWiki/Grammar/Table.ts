@@ -8,43 +8,42 @@ import {
 } from "mdast";
 import { visit } from "unist-util-visit";
 import { objectAssign } from "./Utils";
-class BTableCell {
-  public static create(nodes: TableCell[]) {
-    return new this(nodes);
-  }
-  constructor(private node: TableCell[] = []) {}
+import BBase from "./BBase";
+class BTableCell extends BBase<TableCell[]> {
   public toNode() {
     return [];
   }
 }
-class BTableRow {
-  public static create(nodes: TableRow[]) {
-    return new this(nodes);
+class BTableRow extends BBase<TableRow[]> {
+  constructor(
+    protected nodes: TableRow[] = [],
+    protected sep = "|",
+    protected isTitle = false
+  ) {
+    super(nodes);
   }
-  constructor(private nodes: TableRow[] = []) {}
-  public toNode(sep = "|") {
+  public static create(node: any, sep?: string, isTitle?: boolean) {
+    return new this(node, sep, isTitle);
+  }
+  public toNode() {
     return [];
   }
 }
-export default class BTable {
+export default class BTable extends BBase<Table> {
   public static BTableCell = BTableCell;
   public static BTableRow = BTableRow;
-  public static create(node: Table) {
-    return new this(node);
-  }
   private children: PhrasingContent[] = [];
-  constructor(private node: Table = { type: "table", children: [] }) {
-    this.init();
-  }
+
   public createText(value: string) {
     return { type: "text", value } as Text;
   }
+
   public init() {
     const { node, createText } = this;
 
     if (node.children.length != 0) {
       const { children } = node;
-      const title = BTableRow.create([children.shift()!]).toNode("!");
+      const title = BTableRow.create([children.shift()!], "!", true).toNode();
       const tableRows = BTableRow.create(children).toNode();
       this.children = [
         createText(
@@ -59,10 +58,11 @@ export default class BTable {
   public static toVisit(tree: any) {
     visit<Table, "table">(tree, "table", (node, index, parent) => {
       BTable.create(node).toNode();
-      console.log(node);
+      // console.log(node);
     });
   }
   public toNode() {
+    this.init();
     const { node, children } = this;
 
     return objectAssign<Paragraph>(node, {

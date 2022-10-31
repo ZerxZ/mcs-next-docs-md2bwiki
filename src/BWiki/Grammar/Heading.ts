@@ -1,16 +1,10 @@
 import { Heading, Paragraph, PhrasingContent } from "mdast";
 import { visit } from "unist-util-visit";
+import BBase from "./BBase";
 import { objectAssign } from "./Utils";
-export default class BHeading {
-  private children: PhrasingContent[];
-  constructor(
-    private node: Heading = { type: "heading", depth: 1, children: [] }
-  ) {
-    this.children = [];
-    if (node.depth > 0 && node.children.length > 0) {
-      this.init();
-    }
-  }
+export default class BHeading extends BBase<Heading> {
+  private children: PhrasingContent[] = [];
+
   public init() {
     const { node } = this;
     const { depth, children } = node;
@@ -22,7 +16,11 @@ export default class BHeading {
     ];
   }
   public toNode() {
-    const { node, children } = this;
+    const { node } = this;
+    if (node.depth > 0 && node.children.length > 0) {
+      this.init();
+    }
+    const { children } = this;
     return objectAssign<Paragraph>(node, {
       type: "paragraph",
       children,
@@ -33,8 +31,5 @@ export default class BHeading {
     visit<Heading, "heading">(tree, "heading", (node, index, parent) => {
       BHeading.create(node).toNode();
     });
-  }
-  public static create(node: Heading) {
-    return new this(node);
   }
 }
