@@ -25,7 +25,7 @@ async function init() {
     .use(remarkGfm)
     .use(RemarkBWiki)
     .use(remarkStringify)
-    .process(readSync("./Next/doc/描述设置.md", "utf8"));
+    .process(readSync("./Next/doc/描述文件设置.md", "utf8"));
   test.value = (test.value as string).replace(/(\\|&#x20;)/gim, "");
   if (!existsSync("./Build")) {
     mkdirSync("./Build");
