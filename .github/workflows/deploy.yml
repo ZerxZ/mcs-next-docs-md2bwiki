@@ -6,7 +6,14 @@ on:
       - master
   schedule:
     - cron: "0 21 * * 0"
+env:
+  # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
 
+  BOT_PASSWORD: ${{ secrets.BOT_PASSWORD }}
+  BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
+  COOKIES: ${{ secrets.COOKIES }}
+  WIKI_NAME: ${{ secrets.WIKI_NAME }}
+  WIKI_SITE: ${{ secrets.WIKI_SITE }}
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -41,14 +48,6 @@ jobs:
       # 运行构建脚本
       - name: Next Docs to MCS Wiki
         run: yarn start
-        env:
-          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-
-          BOT_PASSWORD: ${{ env.BOT_PASSWORD }}
-          BOT_USERNAME: ${{ env.BOT_USERNAME }}
-          COOKIES: ${{ env.COOKIES }}
-          WIKI_NAME: ${{ env.WIKI_NAME }}
-          WIKI_SITE: ${{ env.WIKI_SITE }}
 
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
