@@ -1,4 +1,7 @@
-import "dotenv/config";
+if (process.env.isGithub) {
+  import("dotenv/config");
+}
+
 import { readFileSync } from "fs";
 import { IBWikiBotOption, BWikiBot } from "./bot";
 
@@ -21,6 +24,8 @@ const options: IBWikiBotOption = {
 export default async () => {
   const bot = BWikiBot.Create(options);
   await bot.login();
+  console.log(cookie);
+
   bot.edit("鸽子测试", (rev) => {
     let context = readFileSync("./Build/test.bwiki", "utf8");
     return rev.content != context ? { text: context } : {};
