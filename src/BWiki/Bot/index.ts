@@ -24,7 +24,6 @@ const options: IBWikiBotOption = {
 export default async () => {
   const bot = BWikiBot.Create(options);
   await bot.login();
-  console.log(cookie);
 
   bot.edit("鸽子测试", (rev) => {
     let context = readFileSync("./Build/test.bwiki", "utf8");
