@@ -6,6 +6,7 @@ import BHeading from "./Grammar/Heading";
 import BCode from "./Grammar/Code";
 import BTable from "./Grammar/Table";
 import BParagraph from "./Grammar/Paragraph";
+import BList from "./Grammar/List";
 
 const RemarkBWiki: Plugin<[Options?], string, Root> = (options) => {
   return function transformer(tree: any, vfile: any) {

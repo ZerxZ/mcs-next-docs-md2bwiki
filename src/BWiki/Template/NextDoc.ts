@@ -12,6 +12,6 @@ export function replaceNextDoc(value: string) {
       return `<font size=4px color=#e8ebdd>Mod目录结构</font>`;
     });
   }
-  text += `\n{{左侧目录|结束}}\n\n\n{{Next导航}}\n\n{{#Widget:Next-wiki-css}}`;
+  text += `\n{{左侧目录|结束}}\n`;
   return text;
 }

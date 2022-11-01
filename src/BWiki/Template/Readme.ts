@@ -1,8 +1,8 @@
 export function replaceReadme(value: string) {
-  const regex = /\=\<kbd\>觅长生 Next Mod框架\<\/kbd\>\=/gim;
-  let text = value;
-  if (regex.test(value)) {
-    text = value.replace(regex, (key, ...args) => {
+    let text = value;
+    text = text.replace("![Next](/preview.png)\n","");
+    text = text.replace("Licenses/NextLICENSE ","Licenses/Next/LICENSE ");
+         text = text.replace(/\=\<kbd\>觅长生 Next Mod框架\<\/kbd\>\=/gim, (key, ...args) => {
       return `__NOTOC__
 
 <div class="visible-xs">
@@ -16,7 +16,7 @@ ${key}
 </div>
 `;
     });
-    text += `\n\n{{Next导航}}\n\n{{#Widget:Next-wiki-css}}`;
-  }
+
+    text = text.split("\n").slice(3).join("\n")
   return text;
 }
