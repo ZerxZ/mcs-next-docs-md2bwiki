@@ -2,6 +2,7 @@ Next
 .env
 dist
 build
+.yarn
 
 # Logs
 logs
