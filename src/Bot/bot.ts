@@ -50,8 +50,9 @@ export class BWikiBot extends mwn {
             }
             return {};
           });
-        } catch {
-          if (typeof result.value == "string") {
+        } catch(e) {
+          console.log(e)
+          if (e && typeof result.value == "string") {
             await this.create(pageName, result.value);
           }
         }
