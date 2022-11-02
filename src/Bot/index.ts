@@ -23,28 +23,5 @@ export default async () => {
   const bot = BWikiBot.Create(options);
   await bot.login();
   await bot.init();
-  const buildPath = "Build";
-  const nextDocPath = "Next/doc";
 
-  if (!existsSync(buildPath)) mkdirSync(buildPath);
-  for (const filename of readdirSync(nextDocPath)) {
-    const p = parse(filename);
-    console.log(p);
-    if (p.ext == ".md") {
-      let result = await bot.MdToBwiki(filename, nextDocPath);
-      let pageName = `鸽子测试-${bot.getPageName(p.name)}`;
-      try {
-        await bot.edit(pageName, ({ content }) => {
-          if (typeof result.value == "string") {
-            return content != result.value ? { text: result.value } : {};
-          }
-          return {};
-        });
-      } catch {
-        if (typeof result.value == "string") {
-          await bot.create(pageName, result.value);
-        }
-      }
-    }
-  }
 };

@@ -33,6 +33,30 @@ export class BWikiBot extends mwn {
 
   public async init() {
     await this.getNextGithub();
+    const buildPath = "Build";
+    const nextDocPath = "Next/doc";
+
+    if (!existsSync(buildPath)) mkdirSync(buildPath);
+    for (const filename of readdirSync(nextDocPath)) {
+      const p = parse(filename);
+      console.log(p);
+      if (p.ext == ".md") {
+        let result = await this.MdToBwiki(filename, nextDocPath);
+        let pageName = `鸽子测试-${this.getPageName(p.name)}`;
+        try {
+          await this.edit(pageName, ({ content }) => {
+            if (typeof result.value == "string") {
+              return content != result.value ? { text: result.value } : {};
+            }
+            return {};
+          });
+        } catch {
+          if (typeof result.value == "string") {
+            await this.create(pageName, result.value);
+          }
+        }
+      }
+    }
 
   }
   public getPageName(key: string) {
