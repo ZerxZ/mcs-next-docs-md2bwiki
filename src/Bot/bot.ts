@@ -60,8 +60,7 @@ export class BWikiBot extends mwn {
         }
     }
 public getPageName(key:string){
-        return this.hasCatolog(key)? NEXT_CATALOG[key].name :key;
-}
+        return this.hasCatolog(key)? NEXT_CATALOG[key].name :key;}
     private parseCookies(CookieString?: string) {
         return !!CookieString ? CookieString.split(";").map((v) => v.trim()) : [];
     }
