@@ -2,6 +2,7 @@ import { Heading, Paragraph, PhrasingContent } from "mdast";
 import { visit } from "unist-util-visit";
 import BBase from "./BBase";
 import { objectAssign } from "./Utils";
+
 export default class BHeading extends BBase<Heading> {
   private children: PhrasingContent[] = [];
 

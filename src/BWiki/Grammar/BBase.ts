@@ -1,4 +1,5 @@
 import { Parent } from "mdast";
+
 export default class BBase<T = Parent> {
   /**
    *

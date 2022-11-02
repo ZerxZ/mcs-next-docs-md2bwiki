@@ -1,7 +1,9 @@
 import { replaceNextDoc } from "./NextDoc";
 import { replaceReadme } from "./Readme";
 
-export const NEXT_CATALOG :{[props in string]:{name:string,replace:(value:string)=>string}}= {
+export const NEXT_CATALOG: {
+  [props in string]: { name: string; replace: (value: string) => string };
+} = {
   Readme: {
     name: "Next首页",
     replace: replaceReadme,

@@ -1,6 +1,7 @@
-import { Link, Text, PhrasingContent, StaticPhrasingContent } from "mdast";
+import { Link, StaticPhrasingContent, Text } from "mdast";
 import BBase from "./BBase";
 import { objectAssign } from "./Utils";
+
 export default class BUrl extends BBase<Link> {
   public isLocalLink() {
     return !this.isExternalLink();

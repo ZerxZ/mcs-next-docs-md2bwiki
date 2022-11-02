@@ -2,23 +2,12 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import RemarkBWiki from "./BWiki";
-import {
-  readdirSync,
-  readFileSync,
-  writeFile,
-  existsSync,
-  mkdirSync,
-} from "fs";
-import {resolve} from "path";
-import { toVFile, readSync, writeSync } from "to-vfile";
+import { readSync } from "to-vfile";
 import remarkGfm from "remark-gfm";
-import { downloadWithCheck } from "gdl";
-import { NEXT_CATALOG } from "./BWiki/Template";
 //@ts-ignore
 import Bot from "./Bot";
 
 async function init() {
-
   console.log();
   let test = await unified()
     .use(remarkParse)
@@ -31,7 +20,7 @@ async function init() {
   // }
   // test.path = "./Build/test.bwiki";
   // writeSync(test, "utf-8");
- // console.log(test.value)
+  // console.log(test.value)
   await Bot();
 }
 init();

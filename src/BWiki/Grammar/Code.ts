@@ -1,4 +1,4 @@
-import { Code, PhrasingContent, Paragraph } from "mdast";
+import { Code, Paragraph } from "mdast";
 import { visit } from "unist-util-visit";
 import { h } from "./Utils";
 import BBase from "./BBase";

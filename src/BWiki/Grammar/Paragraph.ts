@@ -1,9 +1,9 @@
-import { Paragraph, PhrasingContent } from "mdast";
+import { Paragraph, PhrasingContent, Text } from "mdast";
 import { visit } from "unist-util-visit";
 import { h } from "./Utils";
-import { Text } from "mdast";
 import BUrl from "./Url";
 import BBase from "./BBase";
+
 export default class BParagraph extends BBase<Paragraph> {
   private children: PhrasingContent[] = [];
 
