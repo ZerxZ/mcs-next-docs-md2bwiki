@@ -69,7 +69,7 @@ export class BWikiBot extends mwn {
       .use(remarkGfm)
       .use(RemarkBWiki)
       .use(remarkStringify)
-      .process(readSync(resolve(process.cwd(), folder, filename)));
+      .process(readSync(resolve(process.cwd(),"../", folder, filename)));
     if (Buffer.isBuffer(result.value)) {
       result.value = result.value.toString();
     }
