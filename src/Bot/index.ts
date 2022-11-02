@@ -47,9 +47,4 @@ export default async () => {
       }
     }
   }
-  //bot.edit("鸽子测试", (rev) => {
-  //  let context = readFileSync("./Build/test.bwiki", "utf8");
-  //  return rev.content != context ? { text: context } : {};
-  //});
-  // await bot.logout();
 };
