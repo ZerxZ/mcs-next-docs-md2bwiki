@@ -46,9 +46,9 @@ export class BWikiBot extends mwn {
         try {
           await this.edit(pageName, ({ content }) => {
             if (typeof result.value == "string") {
-              return content != result.value ? { text: result.value } : {};
+              return content != result.value ? { text: result.value } : { text:""};
             }
-            return {};
+            return { text:""};
           });
         } catch(e) {
           console.log(e)
