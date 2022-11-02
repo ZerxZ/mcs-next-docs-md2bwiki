@@ -88,7 +88,7 @@ public getPageName(key:string){
     }
 
     private async MdToBwiki(filename: string, folder = "Next") {
-        let result = await unified().use(remarkParse).use(remarkGfm).use(RemarkBWiki).use(remarkStringify).process(readSync(`${process.cwd()}/${folder}${ filename}`))
+        let result = await unified().use(remarkParse).use(remarkGfm).use(RemarkBWiki).use(remarkStringify).process(readSync(`${process.cwd()}/${folder}/${ filename}`))
         if (Buffer.isBuffer(result.value)) {
             result.value = result.value.toString()
         }
