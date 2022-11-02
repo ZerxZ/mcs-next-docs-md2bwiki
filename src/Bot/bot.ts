@@ -9,6 +9,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkStringify from "remark-stringify";
 import {readSync, writeSync} from "to-vfile";
+import * as process from "process";
 
 export interface IBWikiBotOption extends MwnOptions {
     cookie?: string;
@@ -87,7 +88,7 @@ public getPageName(key:string){
     }
 
     private async MdToBwiki(filename: string, folder = "Next") {
-        let result = await unified().use(remarkParse).use(remarkGfm).use(RemarkBWiki).use(remarkStringify).process(readSync(`./${folder}${ filename}`))
+        let result = await unified().use(remarkParse).use(remarkGfm).use(RemarkBWiki).use(remarkStringify).process(readSync(`${process.cwd()}/${folder}${ filename}`))
         if (Buffer.isBuffer(result.value)) {
             result.value = result.value.toString()
         }
@@ -102,7 +103,7 @@ public getPageName(key:string){
     }
 
     private async getNextGithub() {
-        if (!existsSync(resolve(process.cwd(), "Next")))
+        if (!existsSync(`${process.cwd()}/Next`))
             await downloadWithCheck("https://github.com/magicskysword/Next", "Next");
     }
 }
