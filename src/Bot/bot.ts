@@ -20,7 +20,7 @@ export class BWikiBot extends mwn {
   private _cookie: string[];
 
   constructor(options: IBWikiBotOption) {
-    // console.log(options);
+     console.log(options);
     super(options);
     this._cookie = this.parseCookies(options.cookie);
     this.initCookies();
